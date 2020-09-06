@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-
-		int[] fiados = new int[10];
-		int cont = 0;
 		
-		String nome = "";
+		Consumidor consumidor = new Consumidor();
+		consumidor.fiados = new int[10];
+		
+		int cont = 0;
 		int repet = 0;
 		
 		
@@ -17,14 +17,14 @@ public class Main {
 		Scanner ler = new Scanner(System.in);
 		
 		System.out.print("Informe o nome do cliente: ");
-		nome = scanner.nextLine();
+		consumidor.nome = scanner.nextLine();
 		System.out.printf("Informe o número de valores que deseja adicionar: ");
 		repet = ler.nextInt();		
 		
 		while (cont < repet) {
 			System.out.print("Informe o valor da compra: ");
-			fiados[cont] = Integer.valueOf(scanner.nextLine());
-			if (fiados[cont] > 0) {
+			consumidor.fiados[cont] = Integer.valueOf(scanner.nextLine());
+			if (consumidor.fiados[cont] > 0) {
 				cont++;
 			}
 			else {
@@ -33,13 +33,13 @@ public class Main {
 			}
 		}
 		
-		int total = somaWhile(fiados);
+		int total = somaWhile(consumidor.fiados);
 		
 		if (total > 100) {
-			System.out.println("Cliente " + nome + " deve " + total + " - ganhou brinde!");
+			System.out.println("Cliente " + consumidor.nome + " deve " + total + " - ganhou brinde!");
 		}
 		else {
-			System.out.println("Cliente " + nome + " deve " + total);
+			System.out.println("Cliente " + consumidor.nome + " deve " + total);
 		}
 	}
 	
