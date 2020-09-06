@@ -6,68 +6,43 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Consumidor consumidor = new Consumidor();
-		consumidor.fiados = new int[10];
-		
-		int cont = 0;
-		int repet = 0;
-		
+		int cont = 0, repet = 0;
 		
 		Scanner scanner = new Scanner(System.in);
-		Scanner ler = new Scanner(System.in);
-		
 		System.out.print("Informe o nome do cliente: ");
-		consumidor.nome = scanner.nextLine();
+		
+		String nome = scanner.nextLine();
+		Consumidor consumidor = new Consumidor(nome);
+		
+		System.out.print("Informe o telefone do cliente: ");
+		
+		String telefone = scanner.nextLine();
+		consumidor.setTelefone(telefone);
+		
+		Scanner ler = new Scanner(System.in);		
 		System.out.printf("Informe o número de valores que deseja adicionar: ");
 		repet = ler.nextInt();		
 		
 		while (cont < repet) {
 			System.out.print("Informe o valor da compra: ");
-			consumidor.fiados[cont] = Integer.valueOf(scanner.nextLine());
-			if (consumidor.fiados[cont] > 0) {
+			int fiado = Integer.valueOf(scanner.nextLine());
+			consumidor.registrarFiado(fiado);
+			if (consumidor.getFiado() > 0) {
 				cont++;
 			}
 			else {
-				System.out.print("Informe um valor maior que zero! ");
+				System.out.print("[ERRO] Informe um valor maior que zero! ");
 				return;
 			}
 		}
 		
-		int total = somaWhile(consumidor.fiados);
+		int total = consumidor.getFiado();
 		
 		if (total > 100) {
-			System.out.println("Cliente " + consumidor.nome + " deve " + total + " - ganhou brinde!");
+			System.out.println("Cliente " + consumidor.getNome() + " - Telefone: " + consumidor.getTelefone() +  " deve R$ " + total + ".");
 		}
 		else {
-			System.out.println("Cliente " + consumidor.nome + " deve " + total);
+			System.out.println("Valor inferior a R$ 100,00...");
 		}
 	}
-	
-	public static int somaWhile(int[] fiados) {
-		int cont = 0;
-		int total = 0;
-		while (cont < fiados.length) {
-			total += fiados[cont];
-			cont++;
-		}
-		return total;
-	}
-	
-	public static int somaFor(int[] fiados) {
-		int total =0;
-		
-		for(int cont = 0; cont < fiados.length; cont++) {
-			total += fiados[cont];
-		}
-		return total;
-	}
-	
-	public static int somaForeach(int[] fiados) {
-		int total =0;
-		for (int fiado : fiados) {
-			total += fiado;
-		}
-		return total;
-	}
-
 }
